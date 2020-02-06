@@ -1,14 +1,11 @@
-# petercameron/ubuntu-openjdk-mysql
-FROM ubuntu:16.04
-
-# Update apt-get 
-RUN apt-get -qq update && apt-get install -y sudo
-
-# install openjdk
-RUN apt-get install -y openjdk-8-jdk
-
-# install mysql
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server
-RUN find /var/lib/mysql -type f -exec touch {} \; && service mysql start
-
-CMD ["bash"]
+version: '3'
+services:
+  ubuntu-openjdk-mysql:
+    build: ubuntu-openjdk8-mysql56
+    image: petercameron/ubuntu-openjdk8-mysql56 # goes to local registry
+    ports:
+      - "13306:3306"
+#
+#  service2:
+#    build: .
+#    image: youruser/yourimage  # goes to youruser DockerHub registry
